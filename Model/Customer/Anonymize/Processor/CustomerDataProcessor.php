@@ -109,7 +109,7 @@ class CustomerDataProcessor implements ProcessorInterface
         $secureData = $this->customerRegistry->retrieveSecureData($customer->getId());
         $dateTime = (new DateTime())->setTimestamp(PHP_INT_MAX);
         $secureData->setData('lock_expires', $dateTime->format(DateTimeFormat::DATETIME_PHP_FORMAT));
-        $secureData->setPasswordHash(sha1(uniqid((string)random_int(), true)));
+        $secureData->setPasswordHash(sha1(uniqid((string)random_int(PHP_INT_MIN, PHP_INT_MAX), true)));
 
         $customer = $this->anonymizer->anonymize($customer);
         if ($customer instanceof DataObject) {
