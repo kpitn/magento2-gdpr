@@ -40,15 +40,14 @@ class EraseComponents implements OptionSourceInterface
      */
     private function retrieveDelegateProcessors(): array
     {
-        return array_keys(
-            array_merge(
-                [],
-                ...array_map(
-                    fn (string $resolver): mixed => $this->retrieveArgument($resolver, 'processors'),
-                    $this->retrieveArgument($this->factoryClassName, 'processorResolvers', [])
-                )
-            )
-        );
+        $resolvers = $this->retrieveArgument($this->factoryClassName, 'processorResolvers', []);
+
+        $processors = [];
+        foreach ($resolvers as $resolver) {
+            $processors = array_merge($processors, $this->retrieveArgument($resolver, 'processors'));
+        }
+
+        return array_keys($processors);
     }
 
     private function retrieveArgument(string $className, string $argumentName, mixed $defaultValue = null): mixed
@@ -57,17 +56,15 @@ class EraseComponents implements OptionSourceInterface
             $this->objectManagerConfig->getPreference($className)
         );
 
-        // Hack: retrieve the argument even if the DI is cached, compiled or whatever...
-        return $arguments[$argumentName]['_i_']
-            ?? $arguments[$argumentName]['_ins_']
-            ?? $arguments[$argumentName]['_v_']
-            ?? $arguments[$argumentName]['_vac_']
-            ?? $arguments[$argumentName]['_vn_']
-            ?? $arguments[$argumentName]['_a_']
-            ?? $arguments[$argumentName]['_d_']
-            ?? $arguments[$argumentName]['instance']
-            ?? $arguments[$argumentName]['argument']
-            ?? $arguments[$argumentName]
-            ?? $defaultValue;
+        // Retrieve the argument by trying different keys in a prioritized order
+        $keys = ['_i_', '_ins_', '_v_', '_vac_', '_vn_', '_a_', '_d_', 'instance', 'argument'];
+
+        foreach ($keys as $key) {
+            if (isset($arguments[$argumentName][$key])) {
+                return $arguments[$argumentName][$key];
+            }
+        }
+
+        return $arguments[$argumentName] ?? $defaultValue;
     }
 }
