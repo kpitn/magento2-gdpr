@@ -19,10 +19,10 @@ class GuestFilterModifier implements ModifierInterface
 
     public function apply(AbstractDb $collection, WebsiteInterface $website): void
     {
-        $collection->addFieldToFilter(OrderInterface::CUSTOMER_ID, ['null' => true]);
-        $collection->addFieldToFilter(OrderInterface::CUSTOMER_IS_GUEST, ['eq' => 1]);
+        $collection->addFieldToFilter('main_table.' . OrderInterface::CUSTOMER_ID, ['null' => true]);
+        $collection->addFieldToFilter('main_table.' . OrderInterface::CUSTOMER_IS_GUEST, ['eq' => 1]);
         $collection->addFieldToFilter(
-            OrderInterface::STATE,
+            'main_table.' . OrderInterface::STATE,
             ['in' => $this->erasureConfig->getAllowedStatesToErase($website->getId())]
         );
     }

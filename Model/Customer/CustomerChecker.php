@@ -25,9 +25,9 @@ class CustomerChecker implements EntityCheckerInterface
     {
         $customer = $this->customerRepository->getById($entityId);
         $collection = $this->collectionFactory->create();
-        $collection->addFieldToFilter(OrderInterface::CUSTOMER_ID, $entityId);
+        $collection->addFieldToFilter('main_table.' . OrderInterface::CUSTOMER_ID, $entityId);
         $collection->addFieldToFilter(
-            OrderInterface::STATE,
+            'main_table.' . OrderInterface::STATE,
             ['nin' => $this->erasureConfig->getAllowedStatesToErase($customer->getWebsiteId())]
         );
 
