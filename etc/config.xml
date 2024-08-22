@@ -16,42 +16,17 @@
             </action>
             <anonymize>
                 <customer_attributes>
-                    <email>
-                        <atttribute>email</atttribute>
-                        <anonymizer>email</anonymizer>
-                    </email>
-                    <prefix>
-                        <attribute>prefix</attribute>
-                        <anonymizer>alphaUpper</anonymizer>
-                    </prefix>
-                    <firstname>
-                        <attribute>firstname</attribute>
-                        <anonymizer>anonymous</anonymizer>
-                    </firstname>
-                    <middlename>
-                        <attribute>middlename</attribute>
-                        <anonymizer>anonymous</anonymizer>
-                    </middlename>
-                    <lastname>
-                        <attribute>lastname</attribute>
-                        <anonymizer>anonymous</anonymizer>
-                    </lastname>
-                    <suffix>
-                        <attribute>suffix</attribute>
-                        <anonymizer>alphaUpper</anonymizer>
-                    </suffix>
-                    <dob>
-                        <attribute>dob</attribute>
-                        <anonymizer>date</anonymizer>
-                    </dob>
-                    <gender>
-                        <attribute>gender</attribute>
-                        <anonymizer>number</anonymizer>
-                    </gender>
-                    <taxvat>
-                        <attribute>taxvat</attribute>
-                        <anonymizer>alphaUpper</anonymizer>
-                    </taxvat>
+                    <![CDATA[{
+                        "_opengento_gdpr_anonymize_ca_0":{"attribute":"email","anonymizer":"email"},
+                        "_opengento_gdpr_anonymize_ca_1":{"attribute":"prefix","anonymizer":"alphaUpper"},
+                        "_opengento_gdpr_anonymize_ca_2":{"attribute":"firstname","anonymizer":"anonymous"},
+                        "_opengento_gdpr_anonymize_ca_3":{"attribute":"middlename","anonymizer":"anonymous"},
+                        "_opengento_gdpr_anonymize_ca_4":{"attribute":"lastname","anonymizer":"anonymous"},
+                        "_opengento_gdpr_anonymize_ca_5":{"attribute":"suffix","anonymizer":"alphaUpper"},
+                        "_opengento_gdpr_anonymize_ca_6":{"attribute":"dob","anonymizer":"date"},
+                        "_opengento_gdpr_anonymize_ca_7":{"attribute":"gender","anonymizer":"number"},
+                        "_opengento_gdpr_anonymize_ca_8":{"attribute":"taxvat","anonymizer":"alphaNum"}
+                    }]]>
                 </customer_attributes>
                 <customer_address_attributes>
                     <![CDATA[{
